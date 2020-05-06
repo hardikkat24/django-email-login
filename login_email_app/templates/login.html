@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}
+Login
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid text-center py-3">
+
+    <h1>Log In</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <p class = "text-danger">{{ form.non_field_errors }}</p>
+
+        {% for h in forms.hidden_fields %}
+        <p class = "text-danger">{{ h.errors }}
+        {{ h }}</p>
+        {% endfor %}
+        <p class = "text-danger">Make sure you have registered your email id</p>
+
+            <table class="mx-auto">
+                {% for f in form.visible_fields %}
+                <tr>
+                    <td class="align-top">{{ f.label }}</td>
+                    <td>
+                        {{ f }}
+                        <p class = "text-danger">{{ f.errors }}</p>
+                        <p class = "text-info">{{ f.help_text }}</p>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+
+            <button type = "submit" class = "btn btn-primary">Log In</button>
+
+        </form>
+    <p>Don't have an account?<br><a href = "{% url 'signup' %}">Sign Up</a></p>
+
+</div>
+
+{% endblock %}
+
